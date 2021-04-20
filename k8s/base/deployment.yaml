@@ -15,13 +15,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gcpdemo
+  name: containerapp
   labels: 
     app: front-end
 spec:
   containers:
-  - name: gcpdemo
-    image: gcr.io/ishmeetm/gcpdemo:1.0.1
+  - name: containerapp
+    image: gcr.io/ishmeetm/containerapp:1.0.1
     ports:    
        - containerPort: 8080
     # securityContext:
@@ -36,24 +36,24 @@ spec:
 # apiVersion: apps/v1
 # kind: Deployment
 # metadata:
-#   name: gcpdemo
+#   name: containerapp
 #   labels:
-#     app: gcpdemo
+#     app: containerapp
 # spec:
 #   replicas: 1
 #   selector:
 #     matchLabels:
-#       app: gcpdemo
+#       app: containerapp
 #   template:
 #     metadata:
 #       labels:
-#         app: gcpdemo
+#         app: containerapp
 #     spec:
 #       securityContext:
 #           runAsUser: 0
 #       containers:
-#       - name: gcpdemo
-#         image: gcr.io/ishmeetm/gcpdemo:1.0.1
+#       - name: containerapp
+#         image: gcr.io/ishmeetm/containerapp:1.0.1
 #         ports:
 #         - containerPort: 8080
 #         imagePullPolicy: Always

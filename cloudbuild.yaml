@@ -59,7 +59,7 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'gcr.io/$PROJECT_ID/gcpdemo:prod'
+  - 'gcr.io/$PROJECT_ID/containerapp:prod'
   - '.'
 
 # This step pushes the image to Container Registry
@@ -69,7 +69,7 @@ steps:
   id: 'Push to GCR Container Registry'
   args:
   - 'push'
-  - 'gcr.io/$PROJECT_ID/gcpdemo:prod'
+  - 'gcr.io/$PROJECT_ID/containerapp:prod'
 
 # This step deletes the existing deployment of Anthos AKS cluster
 - name: 'gcr.io/cloud-builders/gcloud'
