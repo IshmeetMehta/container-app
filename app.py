@@ -12,14 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START hello-app]
+# The Docker image contains the following code
 from flask import Flask
-app = Flask('hello-cloudbuild')
+import os
+import socket
 
-@app.route('/')
-def hello():
-  return "Hello World!\n"
+app = Flask(__name__)
 
-if __name__ == '__main__':
-  app.run(host = '0.0.0.0', port = 8080)
-# [END hello-app]
+@app.route("/")
+def showPinehead():
+    html = "<div style='text-align:center;margin:20px;'><h1>Greetings from Another Academy!</h1><img src='https://storage.googleapis.com/la-gcp-labs-resources/essentials/Logo-Pinehead-NVY.png' width='40%' alt='Pinehead @ Google Academy'></div>"
+    return html
+
+if __name__ == "__main__":
+  app.run(host='0.0.0.0', port=80)
