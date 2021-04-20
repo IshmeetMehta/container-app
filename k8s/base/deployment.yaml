@@ -17,7 +17,7 @@ kind: Pod
 metadata:
   name: containerapp
   labels: 
-    app: front-end
+    app: containerapp
 spec:
   containers:
   - name: containerapp
