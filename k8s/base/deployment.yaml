@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
   - name: containerapp
-    image: gcr.io/ishmeetm/containerapp:1.0.1
+    image: gcr.io/smart-grin-309120/containerapp:1.0.1
     ports:    
        - containerPort: 8080
     securityContext:

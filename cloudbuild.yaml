@@ -125,5 +125,6 @@ steps:
     set -x && \
     export KUBECONFIG="$(pwd)/gateway-gke-kubeconfig" && \
     gcloud beta container hub memberships get-credentials gke-cluster && \
+    kubectl get namespaces && \
     kubectl --kubeconfig=gateway-gke-kubeconfig apply -k k8s/overlays/production
   # [END cloudbuild]
