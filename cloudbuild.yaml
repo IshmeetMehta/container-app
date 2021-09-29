@@ -85,32 +85,32 @@ steps:
 #     kubectl --kubeconfig=gateway-aks-delete-kubeconfig delete -k k8s/overlays/production
 #   # [END cloudbuild]
 
-# This step deletes the existing deployment of Anthos EKS cluster
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: /bin/sh
-  id: "Delete from EKS cluster"
-  waitFor: ['Push to GCR Container Registry']
-  args:
-  - '-c'
-  - |
-    set -x && \
-    export KUBECONFIG="$(pwd)/gateway-eks-delete-kubeconfig" && \
-    gcloud beta container hub memberships get-credentials eks-cluster && \
-    kubectl --kubeconfig=gateway-eks-delete-kubeconfig delete -k k8s/overlays/production
-  # [END cloudbuild]
+# # This step deletes the existing deployment of Anthos EKS cluster
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   entrypoint: /bin/sh
+#   id: "Delete from EKS cluster"
+#   waitFor: ['Push to GCR Container Registry']
+#   args:
+#   - '-c'
+#   - |
+#     set -x && \
+#     export KUBECONFIG="$(pwd)/gateway-eks-delete-kubeconfig" && \
+#     gcloud beta container hub memberships get-credentials eks-cluster && \
+#     kubectl --kubeconfig=gateway-eks-delete-kubeconfig delete -k k8s/overlays/production
+#   # [END cloudbuild]
 
-# This step deletes the existing deployment of Anthos GKE cluster
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: /bin/sh
-  id: "Delete from GKE cluster"
-  waitFor: ['Push to GCR Container Registry']
-  args:
-  - '-c'
-  - |
-    set -x && \
-    export KUBECONFIG="$(pwd)/gateway-gke-delete-kubeconfig" && \
-    gcloud beta container hub memberships get-credentials gke-cluster && \
-    kubectl --kubeconfig=gateway-gke-delete-kubeconfig delete -k k8s/overlays/production
+# # This step deletes the existing deployment of Anthos GKE cluster
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   entrypoint: /bin/sh
+#   id: "Delete from GKE cluster"
+#   waitFor: ['Push to GCR Container Registry']
+#   args:
+#   - '-c'
+#   - |
+#     set -x && \
+#     export KUBECONFIG="$(pwd)/gateway-gke-delete-kubeconfig" && \
+#     gcloud beta container hub memberships get-credentials gke-cluster && \
+#     kubectl --kubeconfig=gateway-gke-delete-kubeconfig delete -k k8s/overlays/production
 
 
 # # This step deploys the image to AKS cluster
@@ -127,32 +127,32 @@ steps:
 #     kubectl --kubeconfig=gateway-aks-kubeconfig apply -k k8s/overlays/production
 #   # [END cloudbuild]
 
-# # This step deploys the image to EKS cluster
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   entrypoint: /bin/sh
-#   id: "Deploy to Anthos EKS cluster"
-# #  waitFor: ['Delete from EKS cluster']
-#   args:
-#   - '-c'
-#   - |
-#     set -x && \
-#     export KUBECONFIG="$(pwd)/gateway-eks-kubeconfig" && \
-#     gcloud beta container hub memberships get-credentials eks-cluster && \
-#     kubectl --kubeconfig=gateway-eks-kubeconfig apply -k k8s/overlays/production
-#   # [END cloudbuild]
+# This step deploys the image to EKS cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  id: "Deploy to Anthos EKS cluster"
+#  waitFor: ['Delete from EKS cluster']
+  args:
+  - '-c'
+  - |
+    set -x && \
+    export KUBECONFIG="$(pwd)/gateway-eks-kubeconfig" && \
+    gcloud beta container hub memberships get-credentials eks-cluster && \
+    kubectl --kubeconfig=gateway-eks-kubeconfig apply -k k8s/overlays/production
+  # [END cloudbuild]
 
 
-# # This step deploys the image to GKE cluster
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   entrypoint: /bin/sh
-#   id: "Deploy to Anthos registered GKE cluster"
-#  # waitFor: ['Delete from GKE cluster']
-#   args:
-#   - '-c'
-#   - |
-#     set -x && \
-#     export KUBECONFIG="$(pwd)/gateway-gke-kubeconfig" && \
-#     gcloud beta container hub memberships get-credentials gke-cluster && \
-#     kubectl get namespaces && \
-#     kubectl --kubeconfig=gateway-gke-kubeconfig apply -k k8s/overlays/production
-#   # [END cloudbuild]
+# This step deploys the image to GKE cluster
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  id: "Deploy to Anthos registered GKE cluster"
+ # waitFor: ['Delete from GKE cluster']
+  args:
+  - '-c'
+  - |
+    set -x && \
+    export KUBECONFIG="$(pwd)/gateway-gke-kubeconfig" && \
+    gcloud beta container hub memberships get-credentials gke-cluster && \
+    kubectl get namespaces && \
+    kubectl --kubeconfig=gateway-gke-kubeconfig apply -k k8s/overlays/production
+  # [END cloudbuild]
